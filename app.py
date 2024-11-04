@@ -1,6 +1,10 @@
-import math
 import streamlit as st
 
+# Display an image at the top of the app
+st.image("https://raw.githubusercontent.com/your-username/your-repo-name/main/pipe_insulation.png", use_column_width=True, caption="Pipe Insulation Diagram")
+
+# Your existing Streamlit code follows...
+import math
 # Function to calculate square footage
 def calculate_square_ft(pipe_diameter, insulation_thickness, length):
     outer_diameter = pipe_diameter + (2 * insulation_thickness)
