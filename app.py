@@ -1,10 +1,6 @@
 import math
 import streamlit as st
 
-# Display an image at the top of the app with specified size
-st.image("https://raw.githubusercontent.com/Salman07071978/Insulation-Calculator/main/TM%20Logo.jpg", 
-         width=100, height=100, caption="Pipe Insulation Diagram")
-
 # Function to calculate square footage
 def calculate_square_ft(pipe_diameter, insulation_thickness, length):
     outer_diameter = pipe_diameter + (2 * insulation_thickness)
