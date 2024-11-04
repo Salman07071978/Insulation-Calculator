@@ -2,7 +2,7 @@ import math
 import streamlit as st
 
 # Display an image at the top of the app
-st.image("https://github.com/Salman07071978/Insulation-Calculator/blob/main/TM%20Logo.jpg", 
+st.image(https://github.com/Salman07071978/Insulation-Calculator/blob/main/TM%20Logo.jpg, 
          use_column_width=True, 
          caption="Pipe Insulation Diagram")
 
