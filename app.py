@@ -1,9 +1,10 @@
 import math
 import streamlit as st
 
-# Display an image at the top of the app
+# Display an image at the top of the app with specified size
 st.image("https://raw.githubusercontent.com/Salman07071978/Insulation-Calculator/main/TM%20Logo.jpg", 
-         use_column_width=True, 
+         width=100,  # Width in pixels
+         height=100,  # Height in pixels
          caption="Pipe Insulation Diagram")
 
 # Function to calculate square footage
