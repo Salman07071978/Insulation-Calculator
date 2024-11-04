@@ -2,8 +2,10 @@ import math
 import streamlit as st
 
 # Function to calculate square footage
-def calculate_square_ft(pipe_diameter, insulation_thickness, length):
-    outer_diameter = pipe_diameter + (2 * insulation_thickness)
+def calculate_square_ft(pipe_diameter, insulation_thickness, length, extra_margin):
+    # Add the extra margin for cladding to the pipe diameter
+    adjusted_diameter = pipe_diameter + extra_margin
+    outer_diameter = adjusted_diameter + (2 * insulation_thickness)
     circumference = math.pi * outer_diameter
     square_inch_area = circumference * (length * 12)  # Length converted to inches
     square_ft = square_inch_area / 144  # Convert square inches to square feet
@@ -27,6 +29,7 @@ both the total square footage and the per-foot unit square footage required for 
 st.sidebar.header("Pipe Information")
 pipe_type = st.sidebar.selectbox("Select Pipe Type:", ["SS", "MS", "Copper"], help="Choose the type of pipe that needs insulation.")
 pipe_diameter = st.sidebar.number_input("Enter Pipe Diameter (in inches):", min_value=0.1, help="Diameter of the pipe, measured in inches.")
+extra_margin = st.sidebar.number_input("Enter Extra Margin for Cladding (in inches):", min_value=0.0, help="Additional margin added to pipe diameter for cladding.")
 gauge = st.sidebar.text_input("Enter the Gauge of the Pipe:", help="Provide the pipe's gauge for reference.")
 insulation_thickness = st.sidebar.number_input("Enter Insulation Thickness (in inches):", min_value=0.1, help="Specify the thickness of the insulation.")
 length = st.sidebar.number_input("Enter Pipe Length (in feet):", min_value=0.1, help="Length of the pipe to be insulated, measured in feet.")
@@ -39,7 +42,7 @@ rate_per_unit = st.sidebar.number_input("Enter Rate (in Rupees):", min_value=0.0
 # Button to perform calculation
 if st.sidebar.button("Calculate Insulation Requirements"):
     # Perform calculations
-    square_ft = calculate_square_ft(pipe_diameter, insulation_thickness, length)
+    square_ft = calculate_square_ft(pipe_diameter, insulation_thickness, length, extra_margin)
     running_ft = calculate_running_ft(length)
     unit_square_ft = square_ft / length
     unit_square_inch = unit_square_ft * 144  # Convert to square inches per foot
@@ -57,6 +60,7 @@ if st.sidebar.button("Calculate Insulation Requirements"):
         st.write("Below are the calculated values based on the inputs provided:")
         st.write(f"- **Pipe Type**: {pipe_type}")
         st.write(f"- **Pipe Diameter**: {pipe_diameter} inches")
+        st.write(f"- **Extra Margin for Cladding**: {extra_margin} inches")
         st.write(f"- **Gauge**: {gauge}")
         st.write(f"- **Insulation Thickness**: {insulation_thickness} inches")
         st.write(f"- **Pipe Length**: {length} feet")
@@ -82,6 +86,7 @@ if st.sidebar.button("Calculate Insulation Requirements"):
     if st.button("Reset Inputs"):
         st.sidebar.selectbox("Select Pipe Type:", ["SS", "MS", "Copper"], index=0)
         st.sidebar.number_input("Enter Pipe Diameter (in inches):", min_value=0.1, value=0.1)
+        st.sidebar.number_input("Enter Extra Margin for Cladding (in inches):", min_value=0.0, value=0.0)
         st.sidebar.text_input("Enter the Gauge of the Pipe:", value="")
         st.sidebar.number_input("Enter Insulation Thickness (in inches):", min_value=0.1, value=0.1)
         st.sidebar.number_input("Enter Pipe Length (in feet):", min_value=0.1, value=0.1)
